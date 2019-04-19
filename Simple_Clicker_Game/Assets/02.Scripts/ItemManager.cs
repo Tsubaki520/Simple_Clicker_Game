@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeManager : MonoBehaviour
+public class ItemManager : MonoBehaviour
 {
-    public ClickController click;
     public UnityEngine.UI.Text itemInfo;
+    public ClickController click;
     public float cost;
-    public int count = 0;
-    public int clickPower;
+    public int tickValue;
+    public int count;
     public string itemName;
-    private float m_newCost;
+    private float baseCost;
 
     void Start ()
     {
-
+        baseCost = cost;
     }
 
     void Update ()
     {
-        itemInfo.text = itemName + "\nCost：" + cost + "\nPower：+" + clickPower;
+        itemInfo.text = itemName + "\nCost：" + cost + "\nGold：" + tickValue + "/s";
     }
 
     public void PurchasedUpgrade ()
@@ -28,9 +28,8 @@ public class UpgradeManager : MonoBehaviour
         {
             click.gold -= cost;
             count += 1;
-            click.goldperclick += clickPower;
-            cost = Mathf.Round (cost * 1.15f);
-            m_newCost = Mathf.Pow (cost, m_newCost = cost);
+            click.dmagePerClick += tickValue;
+            cost = Mathf.Round (baseCost * Mathf.Pow (1.15f, count));
         }
     }
 }

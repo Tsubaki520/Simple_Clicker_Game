@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClickController : MonoBehaviour
 {
     [Header ("ClickSetting")]
     [SerializeField]
-    private UnityEngine.UI.Text goldDisplay = null;
+    private Text goldDisplay = null;
     [SerializeField]
-    private UnityEngine.UI.Text dps = null;
+    private Text gpc = null;
+
     public float gold = 0.00f;
-    public int goldperclick = 1;
+    public int dmagePerClick = 1;
 
     void Start ()
     {
@@ -19,12 +21,12 @@ public class ClickController : MonoBehaviour
 
     void Update ()
     {
-        goldDisplay.text = "Gold：" + gold;
-        dps.text = "DPS：" + goldperclick;
+        goldDisplay.text = "Gold：" + gold.ToString ("F0");
+        gpc.text = dmagePerClick + "dmage/click";
     }
 
     public void Clicked ()
     {
-        gold += goldperclick;
+        gold += dmagePerClick;
     }
 }
