@@ -1,20 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
-    public UnityEngine.UI.Text itemInfo;
+    public Text itemInfo;
     public ClickController click;
     public float cost;
     public int tickValue;
     public int count;
     public string itemName;
     private float baseCost;
+    private Button btn;
 
     void Start ()
     {
         baseCost = cost;
+        btn = GetComponent<Button> ();
+        btn.onClick.AddListener (PurchasedUpgrade);
     }
 
     void Update ()

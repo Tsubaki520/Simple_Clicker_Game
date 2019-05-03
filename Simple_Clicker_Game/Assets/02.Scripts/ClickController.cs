@@ -11,18 +11,21 @@ public class ClickController : MonoBehaviour
     [SerializeField]
     private Text gpc = null;
 
+    private Button btn;
+    [Space (15)]
     public float gold = 0.00f;
     public int dmagePerClick = 1;
 
     void Start ()
     {
-
+        btn = GetComponent<Button> ();
+        btn.onClick.AddListener (Clicked);
     }
 
     void Update ()
     {
-        goldDisplay.text = "Gold：" + gold.ToString ("F0");
-        gpc.text = dmagePerClick + "dmage/click";
+        goldDisplay.text = "Gold：" + Currencyconverter.Instance.GetCurrencyIntoString (gold);
+        gpc.text = Currencyconverter.Instance.GetCurrencyIntoString (dmagePerClick) + ":dps";
     }
 
     public void Clicked ()

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour
@@ -9,33 +7,25 @@ public class UpgradeManager : MonoBehaviour
     public Text itemInfo;
     public float cost;
     public int count = 0;
+    public float upgrade = 1.15f;
     public int clickPower;
     public string itemName;
     private float baseCost;
 
+    private Button btn;
     private Color standard = Color.white;
     private Color affordable = Color.gray;
-    private Slider slider;
 
     void Start ()
     {
         baseCost = cost;
-        slider = GetComponentInChildren<Slider> ();
+        btn = GetComponent<Button> ();
+        //btn.onClick.AddListener (PurchasedUpgrade);
     }
 
     void Update ()
     {
         itemInfo.text = itemName + "\nCost:" + cost + "\nPower:+ " + clickPower;
-
-        slider.value = click.gold * 100;
-        if (slider.value >= 100)
-        {
-            GetComponent<Image> ().color = affordable;
-        }
-        else
-        {
-            GetComponent<Image> ().color = standard;
-        }
     }
 
     public void PurchasedUpgrade ()
@@ -45,7 +35,7 @@ public class UpgradeManager : MonoBehaviour
             click.gold -= cost;
             count += 1;
             click.dmagePerClick += clickPower;
-            cost = Mathf.Round (baseCost * Mathf.Pow (1.15f, count));
+            cost = Mathf.Round (baseCost * Mathf.Pow (upgrade, count));
         }
     }
 }
